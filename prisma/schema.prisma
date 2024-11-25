@@ -18,6 +18,8 @@ model user {
 
   password String
 
+  workSessions workSession[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -25,4 +27,23 @@ model user {
 enum userType {
   user
   admin
+}
+
+model workSession {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+
+  start DateTime
+  end DateTime?
+  status workSessionStatusType
+
+  userID String @db.ObjectId
+  user user @relation(fields: [userID], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum workSessionStatusType {
+  active
+  ended
 }
