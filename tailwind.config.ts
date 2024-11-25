@@ -8,10 +8,7 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
+      screens: { "navbar-desktop": "550px" },
     },
   },
   plugins: [],

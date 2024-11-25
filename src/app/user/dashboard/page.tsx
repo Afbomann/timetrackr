@@ -16,7 +16,12 @@ export default async function UserDashboardPage() {
 
   const userFound = await prisma.user.findFirst({
     where: { id: authenticatedToken.id },
-    include: { workSessions: true },
+    include: {
+      workSessions: {
+        select: { start: true, end: true, status: true },
+        orderBy: { id: "desc" },
+      },
+    },
   });
 
   if (!userFound) return redirect("/auth/login");
@@ -48,6 +53,8 @@ export default async function UserDashboardPage() {
         where: { id: activeWorkSessionFoundNew.id },
         data: { status: "ended", end: new Date() },
       });
+
+      return { suc: "Vellykket!" };
     } else {
       await prisma.workSession.create({
         data: {
@@ -56,9 +63,9 @@ export default async function UserDashboardPage() {
           userID: authenticatedTokenNew.id,
         },
       });
-    }
 
-    return { suc: "Vellykket!" };
+      return { suc: "Vellykket!" };
+    }
   }
 
   return (
@@ -67,13 +74,12 @@ export default async function UserDashboardPage() {
         {userFound.lastName}, {userFound.firstName}
       </h2>
 
-      {false && <p className="text-lg lg:text-xl mt-[15px]">Arbeidsøkter</p>}
-
       <UserDashboardClient
         activeWorkSession={
           activeWorkSessionFound ? activeWorkSessionFound.start : null
         }
         toggleWorkSessionActiveServer={toggleWorkSessionActiveServer}
+        workSessions={userFound.workSessions}
       />
     </div>
   );
