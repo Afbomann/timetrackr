@@ -13,7 +13,7 @@ export const metadata: Metadata = { title: "Logg-inn" };
 export default async function AuthLoginPage() {
   const authenticatedToken = await authenticateToken();
 
-  if (authenticatedToken) return redirect("/user/dashboard");
+  if (authenticatedToken) return redirect("/employee/dashboard");
 
   async function loginServer(input: {
     username: string;

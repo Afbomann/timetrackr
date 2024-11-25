@@ -22,10 +22,10 @@ export default async function HomePage() {
 
         {authenticatedToken && (
           <Link
-            href="/user/dashboard"
+            href="/employee/dashboard"
             className="bg-[#1A1A1A] px-[15px] py-[6px] text-white text-base lg:text-lg"
           >
-            Brukerpanel
+            Ansattpanel
           </Link>
         )}
       </div>

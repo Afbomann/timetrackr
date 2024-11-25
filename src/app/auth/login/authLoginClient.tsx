@@ -48,7 +48,7 @@ export default function AuthLoginClient(props: {
   return (
     <form
       onSubmit={loginClient}
-      className="w-[400px] max-w-[85%] bg-slate-100 mx-auto mt-[20dvh] p-[25px]"
+      className="w-[400px] max-w-[85%] bg-slate-100 mx-auto mt-[15dvh] p-[25px]"
     >
       <p className="tracking-wider text-center text-base lg:text-lg">
         Logg-inn på kontoen din

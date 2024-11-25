@@ -6,7 +6,7 @@ import UserDashboardClient from "./userDashboardClient";
 import { TServerActionResponse } from "@/libs/types";
 
 export const metadata: Metadata = {
-  title: "Brukerpanel",
+  title: "Ansattpanel",
 };
 
 export default async function UserDashboardPage() {

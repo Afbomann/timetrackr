@@ -17,6 +17,7 @@ export default function NavbarClient(props: {
         <div className="ml-[7%]">
           <Link href="/">
             <Image
+              onClick={() => setHamburgerToggled(() => false)}
               className="w-[140px] navbar-desktop:w-[170px]"
               src="/images/logo.svg"
               alt="Logo image"
@@ -37,7 +38,7 @@ export default function NavbarClient(props: {
 
           {props.authenticatedToken && (
             <Link
-              href="/user/dashboard"
+              href="/employee/dashboard"
               className="text-sm lg:text-base hidden navbar-desktop:block"
             >
               {props.authenticatedToken.firstName}
@@ -92,7 +93,7 @@ export default function NavbarClient(props: {
             <Link
               onClick={() => setHamburgerToggled(() => false)}
               className="bg-slate-100 px-[15px] py-[6px]"
-              href="/user/dashboard"
+              href="/employee/dashboard"
             >
               {props.authenticatedToken.firstName}
             </Link>
@@ -104,7 +105,7 @@ export default function NavbarClient(props: {
                 await props.logoutServer();
                 setHamburgerToggled(() => false);
               }}
-              className="bg-[#1A1A1A] px-[15px] py-[6px] text-white"
+              className="bg-[#1A1A1A] px-[15px] py-[6px] text-white text-left"
             >
               Logg-ut
             </button>
