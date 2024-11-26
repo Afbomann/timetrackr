@@ -70,13 +70,13 @@ export default function ConfirmToggleWorkSessionModal(props: {
           } flex gap-[10px]`}
         >
           <button
-            className="bg-[#1A1A1A] px-[15px] py-[4px] text-white text-base lg:text-lg"
+            className="bg-[#1A1A1A] px-[20px] py-[4px] text-white text-base lg:text-lg"
             onClick={async () => await toggleWorkSessionActiveClient()}
           >
             Ja
           </button>
           <button
-            className="bg-[#1A1A1A] px-[15px] py-[4px] text-white text-base lg:text-lg"
+            className="bg-[#1A1A1A] px-[20px] py-[4px] text-white text-base lg:text-lg"
             onClick={() => {
               setStatus(
                 (prev) => (prev = { ...prev, err: "", loading: false })
