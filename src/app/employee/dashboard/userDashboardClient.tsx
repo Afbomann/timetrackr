@@ -3,6 +3,7 @@
 import { TServerActionResponse } from "@/libs/types";
 import { workSessionStatusType } from "@prisma/client";
 import { useEffect, useState } from "react";
+import ConfirmToggleWorkSessionModal from "./(modals)/confirmToggleWorkSessionModal";
 
 export default function UserDashboardClient(props: {
   activeWorkSession: Date | null;
@@ -13,15 +14,16 @@ export default function UserDashboardClient(props: {
     status: workSessionStatusType;
   }[];
 }) {
-  const [activeWorkSession, setActiveWorkSession] = useState(
-    props.activeWorkSession
-  );
+  const [activeWorkSession] = useState(props.activeWorkSession);
   const [workSessions] = useState(props.workSessions);
   const [workSessionsFiltered, setWorkSessionsFiltered] = useState(
     props.workSessions
   );
   const [workSessionsFilter, setWorkSessionsFilter] = useState("all");
   const [nowDate, setNowDate] = useState(new Date());
+  const [modals, setModals] = useState({
+    confirmToggleWorkSessionModal: false,
+  });
 
   useEffect(() => {
     switch (workSessionsFilter) {
@@ -87,24 +89,25 @@ export default function UserDashboardClient(props: {
     };
   }, []);
 
-  async function toggleWorkSessionActiveClient() {
-    await props
-      .toggleWorkSessionActiveServer()
-      .then((response) => {
-        if (response.suc) {
-          setActiveWorkSession((prev) => (prev = prev ? null : new Date()));
-          location.reload();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
   return (
     <>
+      <ConfirmToggleWorkSessionModal
+        toggleWorkSessionActiveServer={props.toggleWorkSessionActiveServer}
+        activeWorkSession={activeWorkSession ? true : false}
+        isOpen={modals.confirmToggleWorkSessionModal}
+        onClose={() =>
+          setModals(
+            (prev) => (prev = { ...prev, confirmToggleWorkSessionModal: false })
+          )
+        }
+      />
+
       <button
-        onClick={async () => await toggleWorkSessionActiveClient()}
+        onClick={() =>
+          setModals(
+            (prev) => (prev = { ...prev, confirmToggleWorkSessionModal: true })
+          )
+        }
         className={`${
           activeWorkSession ? "bg-red-400" : "bg-green-400"
         } px-[15px] py-[6px] text-base lg:text-lg mt-[15px]`}
