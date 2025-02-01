@@ -1,6 +1,6 @@
 # TimeTrackr
 
-Time tracking application built with Next.js and TailwindCSS
+Time tracking application built with Next.js and TailwindCSS.
 
 Employees can log into their account and see all their work shifts.</br>
 The employee is able to start and stop a shift which will be logged in a database.
